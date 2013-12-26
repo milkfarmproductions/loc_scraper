@@ -45,6 +45,17 @@ describe LocScraper::Record do
     end
   end
 
+  describe '#summary' do
+    it 'returns nil when record does not have summary' do
+      expect(@record.summary).to eq nil
+    end
+
+    it 'returns the summary of the record' do
+      record = LocScraper::Record.new('9781585368099')
+      expect(record.summary).to eq '"A beginning reader book containing two stories featuring Frog and his friends, where the friends mistake a train for a terrible dragon and Frog rescues a baby possum after it falls into a river"-- Provided by publisher.'
+    end
+  end
+
   describe '#to_json' do
     it 'returns the json format of the record' do
       @record.to_json

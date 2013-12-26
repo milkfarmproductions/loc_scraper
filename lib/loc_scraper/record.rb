@@ -4,7 +4,7 @@ module LocScraper
 
     USER_AGENTS = ['Windows IE 6', 'Windows IE 7', 'Windows Mozilla', 'Mac Safari', 'Mac FireFox', 'Mac Mozilla', 'Linux Mozilla', 'Linux Firefox', 'Linux Konqueror']
 
-    ATTRIBUTES = %w(main_title dewey lccn lcc)
+    ATTRIBUTES = %w(main_title dewey lccn lcc summary)
 
     attr_reader :page, :isbn, :loc_url
 
@@ -41,6 +41,12 @@ module LocScraper
     def lcc
       return @lcc unless @lcc.nil? || @lcc.empty?
       search_by_label('LC classification:')
+    end
+
+    # Returns the summary
+    def summary
+      return @summary unless @summary.nil? || @summary.empty?
+      search_by_label('Summary:')
     end
 
     def to_json
