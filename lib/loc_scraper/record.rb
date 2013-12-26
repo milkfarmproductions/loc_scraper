@@ -23,6 +23,7 @@ module LocScraper
       if @page.at("[text()*='Your search found no results']")
         raise ArgumentError, "ISBN not found"
       end
+      @page
     end
 
     def main_title
