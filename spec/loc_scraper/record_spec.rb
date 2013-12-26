@@ -33,6 +33,12 @@ describe LocScraper::Record do
     end
   end
 
+  describe '#lccn' do
+    it 'returns the lccn of the record' do
+      expect(@record.lccn).to eq '2008001164'
+    end
+  end
+
   describe '#to_json' do
     it 'returns the json format of the record' do
       @record.to_json

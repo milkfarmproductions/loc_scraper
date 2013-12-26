@@ -4,7 +4,7 @@ module LocScraper
 
     USER_AGENTS = ['Windows IE 6', 'Windows IE 7', 'Windows Mozilla', 'Mac Safari', 'Mac FireFox', 'Mac Mozilla', 'Linux Mozilla', 'Linux Firefox', 'Linux Konqueror']
 
-    ATTRIBUTES = %w(main_title dewey)
+    ATTRIBUTES = %w(main_title dewey lccn)
 
     attr_reader :page, :isbn, :loc_url
 
@@ -32,6 +32,11 @@ module LocScraper
       return @dewey unless @dewey.nil? || @dewey.empty?
 
       search_by_label('Dewey class no.:')
+    end
+
+    def lccn
+      return @lccn unless @lccn.nil? || @lccn.empty?
+      search_by_label('LC control no.:')
     end
 
     def to_json
