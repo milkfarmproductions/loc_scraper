@@ -27,6 +27,10 @@ describe LocScraper::Record do
     it 'raises error when ISBN not found' do
       lambda { LocScraper::Record.new('978X') }.should raise_exception ArgumentError
     end
+
+    it 'raises error when ISBN is blank' do
+      lambda { LocScraper::Record.new('') }.should raise_exception ArgumentError
+    end
   end
 
   describe '#search_by_label' do

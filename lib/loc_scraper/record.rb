@@ -8,9 +8,9 @@ module LocScraper
 
     attr_reader :page, :isbn, :loc_url
 
-    def self.get(url)
+    def self.get(isbn)
       begin
-        LocScraper::Record.new(url)
+        LocScraper::Record.new(isbn)
       rescue => e
         puts e
       end
@@ -18,6 +18,9 @@ module LocScraper
 
     def initialize(isbn)
       @isbn = isbn.to_s.strip.gsub(/[-_'."]/, '')
+      if @isbn.nil? || @isbn.empty?
+        raise ArgumentError, "ISBN cannot be blank"
+      end
       @loc_url = "http://catalog.loc.gov/cgi-bin/Pwebrecon.cgi?v3=1&Search%5FArg=#{@isbn}&Search%5FCode=STNO&CNT=1&SID=1"
       @page = http_client.get(@loc_url)
       if @page.at("[text()*='Your search found no results']")
