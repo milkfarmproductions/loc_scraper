@@ -54,7 +54,7 @@ module LocScraper
       # Returns the text of the next element after the one containing
       # the given label.
       def search_by_label(label)
-        el = @page.search("th[text()*='#{label}']").first
+        el = @page.at("th[text()*='#{label}']")
         
         if el && el.next_element
           el.next_element.text.strip
