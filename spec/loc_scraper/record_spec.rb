@@ -23,6 +23,10 @@ describe LocScraper::Record do
       record = LocScraper::Record.new(9781602530454)
       expect(@record.isbn).to eq '9781602530454'
     end
+
+    it 'raises error when ISBN not found' do
+      lambda { LocScraper::Record.new('978X') }.should raise_exception ArgumentError
+    end
   end
 
   describe '#search_by_label' do

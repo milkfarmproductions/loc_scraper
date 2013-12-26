@@ -20,6 +20,9 @@ module LocScraper
       @isbn = isbn.to_s.strip.gsub(/[-_'."]/, '')
       @loc_url = "http://catalog.loc.gov/cgi-bin/Pwebrecon.cgi?v3=1&Search%5FArg=#{@isbn}&Search%5FCode=STNO&CNT=1&SID=1"
       @page = http_client.get(@loc_url)
+      if @page.at("[text()*='Your search found no results']")
+        raise ArgumentError, "ISBN not found"
+      end
     end
 
     def main_title
@@ -67,7 +70,7 @@ module LocScraper
       # the given label.
       def search_by_label(label)
         el = @page.at("th[text()*='#{label}']")
-        
+
         if el && el.next_element
           el.next_element.text.strip
         else
