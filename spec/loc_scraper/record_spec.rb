@@ -13,6 +13,16 @@ describe LocScraper::Record do
     it 'Create an instance of LocScraper::Record class' do
       expect(@record).to be_instance_of LocScraper::Record
     end
+
+    it 'removes dashes from ISBN' do
+      record = LocScraper::Record.new('978-160253-0454')
+      expect(@record.isbn).to eq '9781602530454'
+    end
+
+    it 'coerces ISBN from number to string' do
+      record = LocScraper::Record.new(9781602530454)
+      expect(@record.isbn).to eq '9781602530454'
+    end
   end
 
   describe '#search_by_label' do

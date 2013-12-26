@@ -17,7 +17,7 @@ module LocScraper
     end
 
     def initialize(isbn)
-      @isbn = isbn
+      @isbn = isbn.to_s.strip.gsub(/[-_'."]/, '')
       @loc_url = "http://catalog.loc.gov/cgi-bin/Pwebrecon.cgi?v3=1&Search%5FArg=#{@isbn}&Search%5FCode=STNO&CNT=1&SID=1"
       @page = http_client.get(@loc_url)
     end
