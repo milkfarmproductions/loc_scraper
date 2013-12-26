@@ -24,13 +24,11 @@ module LocScraper
 
     def main_title
       return @main_title unless @main_title.nil? || @main_title.empty?
-
       search_by_label('Main title:')
     end
 
     def dewey
       return @dewey unless @dewey.nil? || @dewey.empty?
-
       search_by_label('Dewey class no.:')
     end
 
