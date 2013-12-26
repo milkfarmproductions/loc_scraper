@@ -30,8 +30,12 @@ describe LocScraper::Record do
   end
 
   describe '#search_by_label' do
-    it 'returns the tag text associated with label of the record' do
+    it 'returns nil when label not found' do
       expect(@record.send(:search_by_label, 'UNKNOWN:')).to eq nil
+    end
+
+    it 'raises error when label not found' do
+      lambda { @record.send(:search_by_label, 'UNKNOWN:', allow_nil: false) }.should raise_exception StandardError
     end
   end
 

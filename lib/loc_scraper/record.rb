@@ -37,7 +37,7 @@ module LocScraper
 
     def lccn
       return @lccn unless @lccn.nil? || @lccn.empty?
-      search_by_label('LC control no.:')
+      search_by_label('LC control no.:', allow_nil: false)
     end
 
     # Returns the library of congress classification
@@ -68,14 +68,21 @@ module LocScraper
 
       # Returns the text of the next element after the one containing
       # the given label.
-      def search_by_label(label)
-        el = @page.at("th[text()*='#{label}']")
+      #
+      # Options:
+      # * +:allow_nil+ - Set to false to raise error when label not found
+      def search_by_label(label, options = {})
+        options = { allow_nil: true }.merge(options)
 
-        if el && el.next_element
-          el.next_element.text.strip
-        else
-          nil
+        unless el = @page.at("th[text()*='#{label}']")
+          if options[:allow_nil]
+            return nil
+          else
+            raise StandardError, "Label not found"
+          end
         end
+
+        el.next_element.text.strip
       end
 
   end
