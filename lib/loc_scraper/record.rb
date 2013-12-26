@@ -4,7 +4,7 @@ module LocScraper
 
     USER_AGENTS = ['Windows IE 6', 'Windows IE 7', 'Windows Mozilla', 'Mac Safari', 'Mac FireFox', 'Mac Mozilla', 'Linux Mozilla', 'Linux Firefox', 'Linux Konqueror']
 
-    ATTRIBUTES = %w(main_title dewey lccn)
+    ATTRIBUTES = %w(main_title dewey lccn lcc)
 
     attr_reader :page, :isbn, :loc_url
 
@@ -35,6 +35,12 @@ module LocScraper
     def lccn
       return @lccn unless @lccn.nil? || @lccn.empty?
       search_by_label('LC control no.:')
+    end
+
+    # Returns the library of congress classification
+    def lcc
+      return @lcc unless @lcc.nil? || @lcc.empty?
+      search_by_label('LC classification:')
     end
 
     def to_json
