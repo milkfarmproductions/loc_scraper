@@ -4,13 +4,12 @@ require 'loc_scraper'
 describe LocScraper::Record do
 
   before(:all) do
-    @page = Nokogiri::HTML(File.open('spec/fixtures/abrahamlincoln.html', 'r') { |f| f.read })
     @isbn = '9781602530454'
     @record = LocScraper::Record.new(@isbn)
   end
 
   describe '.get' do
-    it 'Create an instance of LocScraper::Record class' do
+    it 'creates an instance of LocScraper::Record class' do
       expect(@record).to be_instance_of LocScraper::Record
     end
 
@@ -25,7 +24,7 @@ describe LocScraper::Record do
     end
 
     it 'raises error when ISBN not found' do
-      lambda { LocScraper::Record.new('978X') }.should raise_exception ArgumentError
+      lambda { LocScraper::Record.new('9789999999999') }.should raise_exception ArgumentError
     end
 
     it 'raises error when ISBN is blank' do

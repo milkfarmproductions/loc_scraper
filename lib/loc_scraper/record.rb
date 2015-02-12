@@ -21,7 +21,7 @@ module LocScraper
       if @isbn.nil? || @isbn.empty?
         raise ArgumentError, "ISBN cannot be blank"
       end
-      @loc_url = "http://catalog.loc.gov/cgi-bin/Pwebrecon.cgi?v3=1&Search%5FArg=#{@isbn}&Search%5FCode=STNO&CNT=1&SID=1"
+      @loc_url = "http://catalog.loc.gov/vwebv/search?searchArg=#{@isbn}&searchCode=GKEY%5E*&searchType=1&limitTo=LOCA%3Dall"
       @page = http_client.get(@loc_url)
       if @page.at("[text()*='Your search found no results']")
         raise ArgumentError, "ISBN not found"
@@ -31,29 +31,29 @@ module LocScraper
 
     def main_title
       return @main_title unless @main_title.nil? || @main_title.empty?
-      search_by_label('Main title:')
+      search_by_label('Main title', tag: 'th')
     end
 
     def dewey
       return @dewey unless @dewey.nil? || @dewey.empty?
-      search_by_label('Dewey class no.:')
+      search_by_label('Dewey class no.', tag: 'h2')
     end
 
     def lccn
       return @lccn unless @lccn.nil? || @lccn.empty?
-      search_by_label('LC control no.:', allow_nil: false)
+      search_by_label('LCCN', tag: 'h2', allow_nil: false)
     end
 
     # Returns the library of congress classification
     def lcc
       return @lcc unless @lcc.nil? || @lcc.empty?
-      search_by_label('LC classification:')
+      search_by_label('LC classification (full)', tag: 'h2')
     end
 
     # Returns the summary
     def summary
       return @summary unless @summary.nil? || @summary.empty?
-      search_by_label('Summary:')
+      search_by_label('Summary', tag: 'h2')
     end
 
     def to_json
@@ -74,11 +74,12 @@ module LocScraper
       # the given label.
       #
       # Options:
+      # * +:tag+ - Restrict text search to given html tag
       # * +:allow_nil+ - Set to false to raise error when label not found
       def search_by_label(label, options = {})
         options = { allow_nil: true }.merge(options)
 
-        unless el = @page.at("th[text()*='#{label}']")
+        unless el = @page.at("#{options[:tag]}[text()*='#{label}']")
           if options[:allow_nil]
             return nil
           else
