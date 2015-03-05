@@ -83,7 +83,7 @@ module LocScraper
           if options[:allow_nil]
             return nil
           else
-            raise StandardError, "Label not found"
+            raise StandardError, "Label not found: #{label}"
           end
         end
 

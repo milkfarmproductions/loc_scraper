@@ -38,7 +38,7 @@ describe LocScraper::Record do
     end
 
     it 'raises error when label not found' do
-      expect(lambda { @record.send(:search_by_label, 'UNKNOWN:', allow_nil: false) }).to raise_exception StandardError
+      expect(lambda { @record.send(:search_by_label, 'UNKNOWN:', allow_nil: false) }).to raise_exception(StandardError, 'Label not found: UNKNOWN:')
     end
   end
 
