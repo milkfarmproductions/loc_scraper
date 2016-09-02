@@ -31,3 +31,8 @@ The returning object responds to the following methods
 ## Special Thanks
 
 This code is derived from [LinkedIn Scraper](https://github.com/yatish27/linkedin-scraper), a gem developed by Yatish Mehta.
+
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
