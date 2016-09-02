@@ -1,16 +1,10 @@
 Loc Scraper
 ================
 
+[![Build Status](https://travis-ci.org/milkfarm/loc_scraper.svg?branch=master)](https://travis-ci.org/milkfarm/loc_scraper)
+
 LocScraper is a gem for scraping Loc catalog pages.
 Given the ISBN of the book, it gets the title, dewey, etc.
-
-This code is based largely on LinkedIn Scraper, a gem developed by 
-Yatish Mehta. Please see his github project for more information:
-
-https://github.com/yatish27/linkedin-scraper
-
-Thanks to him and other contributors for the foundation of this project.
-
 
 ##Installation
 
@@ -32,3 +26,8 @@ The returning object responds to the following methods
     record.name          # The name of the book
 
     record.dewey         # The dewey of the book
+
+
+## Special Thanks
+
+This code is derived from [LinkedIn Scraper](https://github.com/yatish27/linkedin-scraper), a gem developed by Yatish Mehta.
