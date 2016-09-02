@@ -31,29 +31,29 @@ module LocScraper
 
     def main_title
       return @main_title unless @main_title.nil? || @main_title.empty?
-      search_by_label('Main title', tag: 'th')
+      search_by_label('Main title', tag: 'h3')
     end
 
     def dewey
       return @dewey unless @dewey.nil? || @dewey.empty?
-      search_by_label('Dewey class no.', tag: 'h2')
+      search_by_label('Dewey class no.', tag: 'h3')
     end
 
     def lccn
       return @lccn unless @lccn.nil? || @lccn.empty?
-      search_by_label('LCCN', tag: 'h2', allow_nil: false)
+      search_by_label('LCCN', tag: 'h3', allow_nil: false)
     end
 
     # Returns the library of congress classification
     def lcc
       return @lcc unless @lcc.nil? || @lcc.empty?
-      search_by_label('LC classification (full)', tag: 'h2')
+      search_by_label('LC classification (full)', tag: 'h3')
     end
 
     # Returns the summary
     def summary
       return @summary unless @summary.nil? || @summary.empty?
-      search_by_label('Summary', tag: 'h2')
+      search_by_label('Summary', tag: 'h3')
     end
 
     def to_json
@@ -79,7 +79,7 @@ module LocScraper
       def search_by_label(label, options = {})
         options = { allow_nil: true }.merge(options)
 
-        unless el = @page.at("#{options[:tag]}[text()*='#{label}']")
+        unless el = @page.at("#{options[:tag]}[text()$='#{label}']")
           if options[:allow_nil]
             return nil
           else
