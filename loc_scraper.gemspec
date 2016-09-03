@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.email         = ['stuff@milkfarmproductions.com']
   gem.description   = %q{Scrape the loc record associated with a given ISBN}
   gem.summary       = %q{Given an ISBN, scrape the Loc record and convert into an accessible object}
-  gem.license       = 'MIT'
   gem.homepage      = 'http://github.com/milkfarm/loc_scraper'
+  gem.license       = 'MIT'
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}) { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
