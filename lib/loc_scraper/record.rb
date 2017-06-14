@@ -47,7 +47,7 @@ module LocScraper
     # Returns the library of congress classification
     def lcc
       return @lcc unless @lcc.nil? || @lcc.empty?
-      search_by_label('LC classification (full)', tag: 'h3')
+      search_by_label('LC classification', tag: 'h3.item-title')
     end
 
     # Returns the summary
