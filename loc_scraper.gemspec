@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency 'mechanize', '~> 2.7'
-  gem.add_dependency 'mime-types', '~> 1.25'
+  gem.add_dependency 'mime-types', '~> 3.0'
 
   gem.add_development_dependency 'bundler', '~> 1.3'
   gem.add_development_dependency 'rake', '~> 10'
